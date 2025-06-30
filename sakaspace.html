@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SakaSpace - Find Verified Rentals in Narok</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #F9FAFB;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+        }
+        .hero-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .category-card:hover {
+            background-color: #F57C00;
+            color: white;
+        }
+        .category-card:hover i {
+            color: white;
+        }
+        .amenity-icon {
+            transition: all 0.3s ease;
+        }
+        .amenity-icon:hover {
+            transform: scale(1.1);
+        }
+        .saved-btn:hover .save-icon {
+            color: #F57C00;
+        }
+        .price-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #F57C00;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 rounded-full bg-[#F57C00] flex items-center justify-center text-white font-bold">SS</div>
+                <span class="text-xl font-bold text-[#1976D2]">SakaSpace</span>
+            </div>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="#" class="text-[#F57C00] font-semibold">Home</a>
+                <a href="#" class="text-gray-600 hover:text-[#F57C00]">Search</a>
+                <a href="#" class="text-gray-600 hover:text-[#F57C00]">Saved</a>
+                <a href="#" class="text-gray-600 hover:text-[#F57C00]">Help</a>
+                <a href="#" class="text-gray-600 hover:text-[#F57C00]">Login</a>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <div class="flex items-center space-x-1">
+                    <span class="text-gray-600">🇰🇪 EN</span>
+                    <span class="text-gray-400">|</span>
+                    <span class="text-gray-600">SW</span>
+                </div>
+                <button class="md:hidden text-gray-600">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg text-white py-20 md:py-32">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <h1 class="text-3xl md:text-5xl font-bold mb-6">Find Verified Rental Spaces in Narok</h1>
+                <p class="text-lg md:text-xl mb-8">Discover your perfect home or business space with trusted listings across Narok County</p>
+                
+                <!-- Search Form -->
+                <div class="bg-white rounded-lg shadow-xl p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div>
+                            <select class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F57C00] text-gray-700">
+                                <option>Property Type</option>
+                                <option>Residential</option>
+                                <option>Commercial</option>
+                            </select>
+                        </div>
+                        <div>
+                            <select class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F57C00] text-gray-700">
+                                <option>Location</option>
+                                <option>Majengo</option>
+                                <option>Total</option>
+                                <option>Narok Town</option>
+                                <option>Lenana</option>
+                                <option>Oloropil</option>
+                            </select>
+                        </div>
+                        <div>
+                            <select class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F57C00] text-gray-700">
+                                <option>Price Range</option>
+                                <option>KES 0 - 5,000</option>
+                                <option>KES 5,000 - 10,000</option>
+                                <option>KES 10,000 - 20,000</option>
+                                <option>KES 20,000+</option>
+                            </select>
+                        </div>
+                        <div>
+                            <button class="w-full bg-[#F57C00] hover:bg-[#E65100] text-white font-semibold p-3 rounded-lg transition duration-300">
+                                Search Properties
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap justify-center mt-4 gap-2">
+                        <button class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm flex items-center">
+                            <i class="fas fa-wifi mr-1 text-[#1976D2]"></i> WiFi
+                        </button>
+                        <button class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm flex items-center">
+                            <i class="fas fa-tint mr-1 text-[#1976D2]"></i> Water
+                        </button>
+                        <button class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm flex items-center">
+                            <i class="fas fa-graduation-cap mr-1 text-[#1976D2]"></i> Near Campus
+                        </button>
+                        <button class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm flex items-center">
+                            <i class="fas fa-money-bill-wave mr-1 text-[#1976D2]"></i> KES <5K
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Listings -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center mb-10">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-800">New This Week in Narok</h2>
+                <a href="#" class="text-[#F57C00] font-semibold flex items-center">
+                    View All <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Property Card 1 -->
+                <div class="property-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Property" class="w-full h-48 object-cover">
+                        <div class="absolute top-3 left-3 bg-[#4CAF50] text-white text-xs px-2 py-1 rounded-full flex items-center">
+                            <i class="fas fa-check-circle mr-1"></i> Verified
+                        </div>
+                        <button class="saved-btn absolute top-3 right-3 bg-white p-2 rounded-full shadow-md">
+                            <i class="save-icon far fa-heart text-gray-400"></i>
+                        </button>
+                        <div class="absolute bottom-3 left-3 bg-white text-[#F57C00] font-bold px-3 py-1 rounded-full text-sm">
+                            KES 12,000
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-1">1BR near Maasai Mara University</h3>
+                        <p class="text-gray-600 text-sm mb-3 flex items-center">
+                            <i class="fas fa-map-marker-alt mr-1 text-[#F57C00]"></i> Majengo, Narok
+                        </p>
+                        <div class="flex justify-between text-sm text-gray-500 border-t pt-3">
+                            <span class="flex items-center">
+                                <i class="fas fa-bed mr-1"></i> 1 Bed
+                            </span>
+                            <span class="flex items-center">
+                                <i class="fas fa-bath mr-1"></i> 1 Bath
+                            </span>
+                            <span class="flex items-center">
+                                <i class="fas fa-vector-square mr-1"></i> 35m²
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Property Card 2 -->
+                <div class="property-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1554469384-e58fac16e23a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Property" class="w-full h-48 object-cover">
+                        <div class="absolute top-3 left-3 bg-[#4CAF50] text-white text-xs px-2 py-1 rounded-full flex items-center">
+                            <i class="fas fa-check-circle mr-1"></i> Verified
+                        </div>
+                        <button class="saved-btn absolute top-3 right-3 bg-white p-2 rounded-full shadow-md">
+                            <i class="save-icon far fa-heart text-gray-400"></i>
+                        </button>
+                        <div class="absolute bottom-3 left-3 bg-white text-[#F57C00] font-bold px-3 py-1 rounded-full text-sm">
+                            KES 8,500
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-1">Spacious Bedsitter in Narok Town</h3>
+                        <p class="text-gray-600 text-sm mb-3 flex items-center">
+                            <i class="fas fa-map-marker-alt mr-1 text-[#F57C00]"></i> Narok Town
+                        </p>
+                        <div class="flex justify-between text-sm text-gray-500 border-t pt-3">
+                            <span class="flex items-center">
+                                <i class="fas fa-couch mr-1"></i> Furnished
+                            </span>
+                            <span class="flex items-center">
+                                <i class="fas fa-tint mr-1"></i> Water
+                            </span>
+                            <span class="flex items-center">
+                                <i class="fas fa-wifi mr-1"></i> WiFi
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Property Card 3 -->
+                <div class="property-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Property" class="w-full h-48 object-cover">
+                        <div class="absolute top-3 left-3 bg-[#4CAF50] text-white text-xs px-2 py-1 rounded-full flex items-center">
+                            <i class="fas fa-check-circle mr-1"></i> Verified
+                        </div>
+                        <button class="saved-btn absolute top-3 right-3 bg-white p-2 rounded-full shadow-md">
+                            <i class="save-icon far fa-heart text-gray-400"></i>
+                        </button>
+                        <div class="absolute bottom-3 left-3 bg-white text-[#F57C00] font-bold px-3 py-1 rounded-full text-sm">
+                            KES 25,000
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-1">2BR Apartment with Balcony</h3>
+                        <p class="text-gray-600 text-sm mb-3 flex items-center">
+                            <i class="fas fa-map-marker-alt mr-1 text-[#F57C00]"></i> Lenana, Narok
+                        </p>
+                        <div class="flex justify-between text-sm text-gray-500 border-t pt-3">
+                            <span class="flex items-center">
+                                <i class="fas fa-bed mr-1"></i> 2 Beds
+                            </span>
+                            <span class="flex items-center">
+                                <i class="fas fa-bath mr-1"></i> 1 Bath
+                            </span>
+                            <span class="flex items-center">
+                                <i class="fas fa-vector-square mr-1"></i> 60m²
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Explore by Category -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-10 text-center">Explore by Category</h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- Residential Categories -->
+                <div class="category-card bg-white p-6 rounded-xl shadow-sm text-center transition duration-300 cursor-pointer">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-[#F57C00] bg-opacity-10 flex items-center justify-center">
+                        <i class="fas fa-home text-2xl text-[#F57C00]"></i>
+                    </div>
+                    <h3 class="font-semibold mb-1">Bedsitter</h3>
+                    <p class="text-gray-500 text-sm">From KES 5,000</p>
+                </div>
+                
+                <div class="category-card bg-white p-6 rounded-xl shadow-sm text-center transition duration-300 cursor-pointer">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-[#F57C00] bg-opacity-10 flex items-center justify-center">
+                        <i class="fas fa-door-open text-2xl text-[#F57C00]"></i>
+                    </div>
+                    <h3 class="font-semibold mb-1">Single Room</h3>
+                    <p class="text-gray-500 text-sm">From KES 3,500</p>
+                </div>
+                
+                <!-- Commercial Categories -->
+                <div class="category-card bg-white p-6 rounded-xl shadow-sm text-center transition duration-300 cursor-pointer">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-[#F57C00] bg-opacity-10 flex items-center justify-center">
+                        <i class="fas fa-store text-2xl text-[#F57C00]"></i>
+                    </div>
+                    <h3 class="font-semibold mb-1">Shop</h3>
+                    <p class="text-gray-500 text-sm">From KES 8,000</p>
+                </div>
+                
+                <div class="category-card bg-white p-6 rounded-xl shadow-sm text-center transition duration-300 cursor-pointer">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-[#F57C00] bg-opacity-10 flex items-center justify-center">
+                        <i class="fas fa-building text-2xl text-[#F57C00]"></i>
+                    </div>
+                    <h3 class="font-semibold mb-1">Office</h3>
+                    <p class="text-gray-500 text-sm">From KES 15,000</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-10">
+                <button class="bg-[#1976D2] hover:bg-[#1565C0] text-white font-semibold px-6 py-3 rounded-lg transition duration-300">
+                    Browse All Categories
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-10 text-center">How SakaSpace Works</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-[#F57C00] bg-opacity-10 flex items-center justify-center">
+                        <i class="fas fa-search text-3xl text-[#F57C00]"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">1. Search Listings</h3>
+                    <p class="text-gray-600">Filter by location, price, and amenities to find properties that match your needs.</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-[#F57C00] bg-opacity-10 flex items-center justify-center">
+                        <i class="fas fa-eye text-3xl text-[#F57C00]"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">2. View Details</h3>
+                    <p class="text-gray-600">See verified photos, descriptions, and contact information for each property.</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-[#F57C00] bg-opacity-10 flex items-center justify-center">
+                        <i class="fas fa-handshake text-3xl text-[#F57C00]"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">3. Connect & Rent</h3>
+                    <p class="text-gray-600">Contact the landlord directly to arrange viewings and finalize your rental.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-10 text-center">What Our Users Say</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gray-300 overflow-hidden mr-4">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Mary Wanjiku</h4>
+                            <p class="text-gray-500 text-sm">Student at MMU</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">"Found my bedsitter near campus in just 2 days! The verification badge gave me confidence the listing was real."</p>
+                    <div class="flex mt-4">
+                        <i class="fas fa-star text-[#F57C00]"></i>
+                        <i class="fas fa-star text-[#F57C00]"></i>
+                        <i class="fas fa-star text-[#F57C00]"></i>
+                        <i class="fas fa-star text-[#F57C00]"></i>
+                        <i class="fas fa-star text-[#F57C00]"></i>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gray-300 overflow-hidden mr-4">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold">John ole Sankei</h4>
+                            <p class="text-gray-500 text-sm">Small Business Owner</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">"Got my shop space in Narok Town at a fair price. The water and electricity details were accurate."</p>
+                    <div class="flex mt-4">
+                        <i class="fas fa-star text-[#F57C00]"></i>
+                        <i class="fas fa-star text-[#F57C00]"></i>
+                        <i class="fas fa-star text-[#F57C00]"></i>
+                        <i class="fas fa-star text-[#F57C00]"></i>
+                        <i class="fas fa-star-half-alt text-[#F57C00]"></i>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gray-300 overflow-hidden mr-4">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="User" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Sarah Naserian</h4>
+                            <p class="text-gray-500 text-sm">Young Professional</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">"Saved so much time not visiting fake listings. All properties I viewed matched their online descriptions."</p>
+                    <div class="flex mt-4">
+                        <i class="fas fa-star text-[#F57C00]"></i>
+                        <i class="fas fa-star text-[#F57C00]"></i>
+                        <i class="fas fa-star text-[#F57C00]"></i>
+                        <i class="fas fa-star text-[#F57C00]"></i>
+                        <i class="fas fa-star text-[#F57C00]"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-16 bg-[#F57C00] text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-2xl md:text-3xl font-bold mb-6">Ready to Find Your Perfect Space?</h2>
+            <p class="text-lg mb-8 max-w-2xl mx-auto">Join thousands of Narok residents who've found their ideal rental through SakaSpace</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button class="bg-white text-[#F57C00] font-semibold px-8 py-3 rounded-lg hover:bg-gray-100 transition duration-300">
+                    Browse Listings
+                </button>
+                <button class="bg-transparent border-2 border-white font-semibold px-8 py-3 rounded-lg hover:bg-white hover:text-[#F57C00] transition duration-300">
+                    Sign Up Free
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-[#F57C00] flex items-center justify-center text-white font-bold">SS</div>
+                        <span class="text-xl font-bold">SakaSpace</span>
+                    </div>
+                    <p class="text-gray-400">Helping Narok residents find verified rental properties since 2023.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Search Properties</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Saved Listings</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">How It Works</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Login/Signup</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Popular Areas</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Majengo</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Narok Town</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Total</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Lenana</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Near MMU</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Contact</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">FAQs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-10 pt-6 text-center text-gray-400 text-sm">
+                <p>© 2023 SakaSpace. All rights reserved. Designed in Narok, Kenya.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification (hidden by default) -->
+    <div id="toast" class="fixed bottom-4 right-4 bg-[#4CAF50] text-white px-6 py-3 rounded-lg shadow-lg hidden">
+        <div class="flex items-center">
+            <i class="fas fa-check-circle mr-2"></i>
+            <span>Saved to your profile!</span>
+        </div>
+    </div>
+
+    <script>
+        // Simple script to show toast when save button is clicked
+        document.addEventListener('DOMContentLoaded', function() {
+            const saveButtons = document.querySelectorAll('.saved-btn');
+            
+            saveButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const icon = this.querySelector('.save-icon');
+                    
+                    // Toggle icon between outline and solid
+                    if (icon.classList.contains('far')) {
+                        icon.classList.remove('far');
+                        icon.classList.add('fas');
+                        icon.style.color = '#F57C00';
+                        
+                        // Show toast
+                        const toast = document.getElementById('toast');
+                        toast.classList.remove('hidden');
+                        
+                        // Hide toast after 3 seconds
+                        setTimeout(() => {
+                            toast.classList.add('hidden');
+                        }, 3000);
+                    } else {
+                        icon.classList.remove('fas');
+                        icon.classList.add('far');
+                        icon.style.color = '#9CA3AF';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
