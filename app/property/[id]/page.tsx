@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { supabase } from "../../lib/supabase"
-import Navbar from "@/components/Navbar";
+import { supabase } from "../../../lib/supabase"
+import Navbar from "../../../components/Navbar";
 import Link from "next/link";
 
 interface Property {
