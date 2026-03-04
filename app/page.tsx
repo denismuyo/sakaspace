@@ -2,12 +2,12 @@ import PropertyCard from "../components/PropertyCard";
 import HeroSection from "../components/HeroSection";
 
 const FEATURED_LISTINGS = [
-  { id: 1, price: "KES 4,500,000", location: "Westlands, Nairobi", type: "Apartment", trust: 96, beds: 3, baths: 2, sqft: "1,200 sqft" },
-  { id: 2, price: "KES 12,000,000", location: "Karen, Nairobi", type: "Villa", trust: 98, beds: 5, baths: 4, sqft: "3,800 sqft" },
-  { id: 3, price: "KES 2,800,000", location: "Kilimani, Nairobi", type: "Studio", trust: 91, beds: 1, baths: 1, sqft: "650 sqft" },
-  { id: 4, price: "KES 7,200,000", location: "Lavington, Nairobi", type: "Townhouse", trust: 94, beds: 4, baths: 3, sqft: "2,400 sqft" },
-  { id: 5, price: "KES 1,900,000", location: "Thika Road, Nairobi", type: "Bedsitter", trust: 88, beds: 1, baths: 1, sqft: "400 sqft" },
-  { id: 6, price: "KES 9,500,000", location: "Runda, Nairobi", type: "Mansion", trust: 99, beds: 6, baths: 5, sqft: "5,200 sqft" },
+  { id: "1", price: "KES 4,500,000", location: "Westlands, Nairobi", type: "Apartment", trust: 96, beds: 3, baths: 2, sqft: "1,200 sqft" },
+  { id: "2", price: "KES 12,000,000", location: "Karen, Nairobi", type: "Villa", trust: 98, beds: 5, baths: 4, sqft: "3,800 sqft" },
+  { id: "3", price: "KES 2,800,000", location: "Kilimani, Nairobi", type: "Studio", trust: 91, beds: 1, baths: 1, sqft: "650 sqft" },
+  { id: "4", price: "KES 7,200,000", location: "Lavington, Nairobi", type: "Townhouse", trust: 94, beds: 4, baths: 3, sqft: "2,400 sqft" },
+  { id: "5", price: "KES 1,900,000", location: "Thika Road, Nairobi", type: "Bedsitter", trust: 88, beds: 1, baths: 1, sqft: "400 sqft" },
+  { id: "6", price: "KES 9,500,000", location: "Runda, Nairobi", type: "Mansion", trust: 99, beds: 6, baths: 5, sqft: "5,200 sqft" },
 ];
 
 export default function HomePage() {
